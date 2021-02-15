@@ -1,0 +1,3 @@
+usr/local/bin/silbad usr/bin
+usr/local/bin/silba-cli usr/bin
+debian/examples/silba.conf etc/silba

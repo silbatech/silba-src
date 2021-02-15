@@ -1,0 +1,8 @@
+/usr/bin/silba-cli		--	gen_context(system_u:object_r:silba_exec_t,s0)
+/usr/sbin/silbad		--	gen_context(system_u:object_r:silba_exec_t,s0)
+/usr/lib(64)?/silba/silbad		--	gen_context(system_u:object_r:silba_exec_t,s0)
+
+/etc/silba(/.*)?		gen_context(system_u:object_r:silba_conf_t,s0)
+/var/lib/silba(/.*)?		gen_context(system_u:object_r:silba_var_lib_t,s0)
+
+(/var)?/run/silbad(/.*)?   gen_context(system_u:object_r:silba_var_run_t,s0)

@@ -1,0 +1,81 @@
+policy_module(silba, 1.100.1)
+
+########################################
+#
+# Declarations
+#
+
+type silba_t;
+type silba_exec_t;
+init_daemon_domain(silba_t, silba_exec_t)
+
+permissive silba_t;
+
+type silba_initrc_exec_t;
+init_script_file(silba_initrc_exec_t)
+
+type silba_conf_t;
+files_type(silba_conf_t)
+
+type silba_var_lib_t;
+files_type(silba_var_lib_t)
+
+type silba_var_run_t;
+files_type(silba_var_run_t)
+
+type silba_port_t;
+corenet_port(silba_port_t)
+
+########################################
+#
+# silba local policy
+#
+allow silba_t self:process { fork };
+
+allow silba_t self:fifo_file rw_fifo_file_perms;
+allow silba_t self:unix_stream_socket create_stream_socket_perms;
+
+manage_dirs_pattern(silba_t, silba_conf_t, silba_conf_t)
+manage_files_pattern(silba_t, silba_conf_t, silba_conf_t)
+
+manage_dirs_pattern(silba_t, silba_var_lib_t, silba_var_lib_t)
+manage_files_pattern(silba_t, silba_var_lib_t, silba_var_lib_t)
+files_var_lib_filetrans(silba_t, silba_var_lib_t, { dir file })
+
+manage_dirs_pattern(silba_t, silba_var_run_t, silba_var_run_t)
+manage_files_pattern(silba_t, silba_var_run_t, silba_var_run_t)
+
+sysnet_dns_name_resolve(silba_t)
+corenet_all_recvfrom_unlabeled(silba_t)
+
+allow silba_t self:tcp_socket create_stream_socket_perms;
+corenet_tcp_sendrecv_generic_if(silba_t)
+corenet_tcp_sendrecv_generic_node(silba_t)
+corenet_tcp_sendrecv_all_ports(silba_t)
+corenet_tcp_bind_generic_node(silba_t)
+
+gen_require(`
+    type silba_port_t;
+')
+allow silba_t silba_port_t:tcp_socket name_bind;
+
+gen_require(`
+    type silba_port_t;
+')
+allow silba_t silba_port_t:tcp_socket name_connect;
+
+domain_use_interactive_fds(silba_t)
+
+files_read_etc_files(silba_t)
+
+miscfiles_read_localization(silba_t)
+
+sysnet_dns_name_resolve(silba_t)
+
+allow silba_t silba_exec_t:file execute_no_trans;
+allow silba_t self:process setsched;
+corecmd_exec_ls(silba_t)
+corenet_tcp_connect_http_port(silba_t)
+dev_read_urand(silba_t)
+fs_getattr_xattr_fs(silba_t)
+kernel_read_system_state(silba_t)

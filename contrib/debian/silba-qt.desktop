@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Name=Silba Core
+Comment=Silba P2P Cryptocurrency
+Comment[fr]=Silba, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=Silba, eşten eşe kriptografik sanal para birimi
+Exec=silba-qt %u
+Terminal=false
+Type=Application
+Icon=silba128
+MimeType=x-scheme-handler/silba;
+Categories=Office;Finance;
+StartupWMClass=Silba-qt

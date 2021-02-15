@@ -1,0 +1,6 @@
+usr/local/bin/silba-qt usr/bin
+share/pixmaps/silba32.xpm usr/share/pixmaps
+share/pixmaps/silba16.xpm usr/share/pixmaps
+share/pixmaps/silba128.png usr/share/pixmaps
+debian/silba-qt.desktop usr/share/applications
+debian/silba-qt.protocol usr/share/kde4/services/
